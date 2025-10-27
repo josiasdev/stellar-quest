@@ -1,0 +1,40 @@
+{
+  "name": "stellar-quest",
+  "version": "1.0.0",
+  "description": "A JavaScript implementation of Stellar Quest challenges to help developers learn the Stellar ecosystem through hands-on coding exercises.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest",
+    "lint": "eslint src/ --fix",
+    "level1": "node src/level-01/1_create_account.js",
+    "level2": "node src/level-02/1_account_merge.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josiasdev/stellar-quest.git"
+  },
+  "keywords": [
+    "stellar",
+    "blockchain",
+    "cryptocurrency",
+    "tutorial",
+    "education",
+    "javascript",
+    "sdk",
+    "fintech",
+    "defi",
+    "xlm"
+  ],
+  "author": {
+    "name": "Francisco Josias da Silva Batista",
+    "email": "francisco.batista67@alu.ufc.br",
+    "url": "https://josias-batista-portfolio.vercel.app"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josiasdev/stellar-quest/issues"
+  },
+  "homepage": "https://github.com/josiasdev/stellar-quest#readme"
+}
