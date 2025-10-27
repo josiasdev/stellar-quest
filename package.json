@@ -36,5 +36,18 @@
   "bugs": {
     "url": "https://github.com/josiasdev/stellar-quest/issues"
   },
-  "homepage": "https://github.com/josiasdev/stellar-quest#readme"
+  "homepage": "https://github.com/josiasdev/stellar-quest#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.12.2",
+    "stellar-sdk": "^13.3.0"
+  },
+  "devDependencies": {},
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE"
+  ]
 }
