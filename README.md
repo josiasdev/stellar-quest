@@ -127,7 +127,7 @@ We welcome contributions! Here's how you can help:
 - Follow JavaScript best practices
 - Include error handling
 
-## 📋 Roadmap
+## Roadmap
 
 - [ ] Complete Level 3 examples
 - [ ] Add TypeScript support
@@ -164,7 +164,3 @@ This project is licensed under the ISC License - see the [LICENSE](LICENSE) file
 ## Disclaimer
 
 This project is an independent implementation of Stellar Quest challenges. It is not officially affiliated with the Stellar Development Foundation or the original Stellar Quest platform. The challenges and concepts are inspired by the official [Stellar Quest](https://quest.stellar.org/) but implemented from scratch in JavaScript.
-
----
-
-**Happy coding! 🚀** If you find this project helpful, please give it a ⭐!
