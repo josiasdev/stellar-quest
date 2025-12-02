@@ -7,12 +7,25 @@ const {
   Asset,
   BASE_FEE,
 } = require("stellar-sdk");
+const axios = require("axios"); // Certifique-se de ter instalado: npm install axios
 
 async function main() {
   try {
     const questKeypair = Keypair.fromSecret("SDRY32RDYRVAXXHFB3PKXC2TLOFBXDPSG3F2VJI4VCRYOPZP3SQOPPY6");
-
     const server = new Horizon.Server("https://horizon-testnet.stellar.org");
+
+    // --- PASSO DE CORREÇÃO: Financiar a conta antes de usar ---
+    console.log(`Checking/Funding account ${questKeypair.publicKey()}...`);
+    try {
+      // Tenta financiar via Friendbot
+      await axios.get(`https://friendbot.stellar.org?addr=${questKeypair.publicKey()}`);
+      console.log("✅ Account funded by Friendbot!");
+    } catch (e) {
+      // Se der erro aqui, geralmente é porque já está financiada ou o friendbot está lento.
+      // Vamos prosseguir e deixar o loadAccount validar.
+      console.log("Note: Friendbot request finished (account might already exist).");
+    }
+    // ----------------------------------------------------------
 
     // O ativo que queremos negociar (USDC na testnet)
     const usdcAsset = new Asset(
@@ -20,6 +33,8 @@ async function main() {
       "GBBD47IF6LWK7P7MDEVSCWR7DPUWV3NY3DTQEVFL4NAT4AQH3ZLLFLA5"
     );
 
+    console.log("Loading account details...");
+    // Agora o loadAccount deve funcionar
     const questAccount = await server.loadAccount(questKeypair.publicKey());
 
     const transaction = new TransactionBuilder(questAccount, {
@@ -30,16 +45,16 @@ async function main() {
       .addOperation(
         Operation.changeTrust({
           asset: usdcAsset,
-          // O limite é opcional, se omitido, é o máximo possível
+          // O limite é opcional. Se omitido, é o máximo possível.
         })
       )
       // Operação 2: Criar a oferta de venda
       .addOperation(
         Operation.manageSellOffer({
           selling: Asset.native(), // O que estamos vendendo: XLM
-          buying: usdcAsset, // O que queremos comprar: USDC
-          amount: "100", // A quantidade de XLM que estamos vendendo
-          price: "0.25", // O preço: 0.25 USDC por cada 1 XLM
+          buying: usdcAsset,       // O que queremos receber: USDC
+          amount: "100",           // Quantos XLM vamos vender
+          price: "0.25",           // Preço: 1 XLM = 0.25 USDC
         })
       )
       .setTimeout(30)
@@ -50,6 +65,10 @@ async function main() {
     console.log("Submitting transaction to create trustline and sell offer...");
     const res = await server.submitTransaction(transaction);
     console.log(`✅ Transaction Successful! Hash: ${res.hash}`);
+    
+    // Dica extra: Verifique a oferta criada
+    console.log(`Check your offer at: https://stellar.expert/explorer/testnet/account/${questKeypair.publicKey()}`);
+
   } catch (error) {
     console.error("❌ An error occurred!");
     if (error.response && error.response.data) {
