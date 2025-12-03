@@ -9,7 +9,7 @@ const {
 
 async function main() {
   try {
-    const questKeypair = Keypair.fromSecret("SCRSMNMGP4DXTYEHNIZGATS7O4NR2M4TFI6PC4VO5YEL5OMLHDK5EOQY");
+    const questKeypair = Keypair.fromSecret("YOUR_SECRET_KEY_HERE");
 
     const newKeypair = Keypair.random();
 
