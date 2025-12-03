@@ -11,7 +11,7 @@ const axios = require("axios"); // Certifique-se de ter instalado: npm install a
 
 async function main() {
   try {
-    const questKeypair = Keypair.fromSecret("SDRY32RDYRVAXXHFB3PKXC2TLOFBXDPSG3F2VJI4VCRYOPZP3SQOPPY6");
+    const questKeypair = Keypair.fromSecret("YOUR_SECRET_KEY_HERE");
     const server = new Horizon.Server("https://horizon-testnet.stellar.org");
 
     // --- PASSO DE CORREÇÃO: Financiar a conta antes de usar ---
