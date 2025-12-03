@@ -29,7 +29,7 @@ async function main() {
     // 1. Definição das chaves
     // NOTA: Se esta conta foi "mergida" anteriormente, ela foi deletada. 
     // O Friendbot irá recriá-la agora.
-    const questKeypair = Keypair.fromSecret("SBDGRVRA7FJXIBEB7SDFHYRBBE7SIZN67JPIDFI6TAIEKCCC3NNFNTRN");
+    const questKeypair = Keypair.fromSecret("YOUR_SECRET_KEY_HERE");
     
     // Gera um destino aleatório a cada execução para garantir limpeza
     const destinationKeypair = Keypair.random();
