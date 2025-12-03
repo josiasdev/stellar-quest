@@ -8,26 +8,72 @@ const {
 } = require("stellar-sdk");
 const axios = require("axios");
 
+// SEU PULO DO GATO (SECRET KEY):
+const SECRET_KEY = "SDESHLFVHLFFV5GOU6Z52WOMLQTXBQTN65JIVSYRBM4PIDTBWKQRFR35";
+
+// ============================================================
+// INSTRUÇÕES DA QUEST (PASSO CRÍTICO):
+// "O campo Home Domain aponta para o domínio web onde você hospeda um arquivo stellar.toml."
+// "Ele prova que você é o proprietário do domínio HTTPS vinculado a uma conta Stellar."
+//
+// 1. Crie seu endpoint no RunKit conforme instruído na Quest.
+// 2. Copie a URL do endpoint (canto inferior direito do script RunKit).
+// 3. Cole a URL abaixo (ex: "something-123.runkit.sh").
+//
+// NOTA: "Nomes de domínio usados aqui devem ter menos de 32 caracteres."
+// ============================================================
+const HOME_DOMAIN = "example.runkit.sh"; 
+
 async function main() {
+  const server = new Horizon.Server("https://horizon-testnet.stellar.org");
+  const questKeypair = Keypair.fromSecret(SECRET_KEY);
+  const publicKey = questKeypair.publicKey();
+
+  console.log(`🔑 Usando Conta: ${publicKey}`);
+  console.log(`🌐 Configurando Home Domain para: ${HOME_DOMAIN}`);
+
+  // Verifica comprimento do domínio (Regra da Quest: < 32 chars)
+  if (HOME_DOMAIN.length > 32) {
+    console.warn("⚠️  AVISO: O domínio parece ter mais de 32 caracteres. Isso pode causar erro na transação.");
+  }
+
+  let questAccount;
+
+  // 1. Verificar e Financiar a conta (Step boilerplate da Quest)
   try {
-    const questKeypair = Keypair.fromSecret(
-      "YOUR_SECRET_KEY_HERE"
-    );
+    questAccount = await server.loadAccount(publicKey);
+    console.log("✅ Conta encontrada no ledger! Pulando Friendbot.");
+  } catch (e) {
+    if (e.response && e.response.status === 404) {
+      console.log("⚠️ Conta não encontrada. Chamando Friendbot...");
+      try {
+        // Usamos axios direto em vez da lib do RunKit para maior compatibilidade
+        await axios.get(`https://friendbot.stellar.org?addr=${publicKey}`);
+        console.log("✅ Friendbot financiou com sucesso. Aguardando ledger...");
+        await new Promise((resolve) => setTimeout(resolve, 5000));
+        questAccount = await server.loadAccount(publicKey);
+      } catch (friendbotError) {
+        console.error("❌ Falha no Friendbot (Erro 503 ou Rate Limit).");
+        return; 
+      }
+    } else {
+      console.error("❌ Erro ao carregar conta:", e.message);
+      return;
+    }
+  }
 
-    console.log("Funding account with friendbot...");
-    await axios.get(`https://friendbot.stellar.org?addr=${questKeypair.publicKey()}`);
-    console.log("Account already funded! Continuing... 🤖");
-
-    const server = new Horizon.Server("https://horizon-testnet.stellar.org");
-    const questAccount = await server.loadAccount(questKeypair.publicKey());
-
+  // 2. Construir a Transação com setOptions (O foco da Quest)
+  try {
+    console.log("🏗️  Construindo transação setOptions...");
+    
     const transaction = new TransactionBuilder(questAccount, {
       fee: BASE_FEE,
       networkPassphrase: Networks.TESTNET,
     })
+      // "Nesta quest, focaremos apenas no campo Home Domain."
       .addOperation(
         Operation.setOptions({
-          homeDomain: "example.runkit.sh",
+          homeDomain: HOME_DOMAIN, // O link para seu arquivo stellar.toml
         })
       )
       .setTimeout(30)
@@ -35,18 +81,28 @@ async function main() {
 
     transaction.sign(questKeypair);
 
-    console.log("Submitting transaction...");
+    console.log("🚀 Enviando transação para a Testnet...");
     const res = await server.submitTransaction(transaction);
-    console.log(`✅ Transaction Successful! Hash: ${res.hash}`);
+    console.log(`✅ Transação Bem-sucedida!`);
+    console.log(`🔗 Hash: ${res.hash}`);
+    console.log(`👉 Agora clique em 'Verify' na Stellar Quest para pegar seu badge!`);
+    
   } catch (error) {
-    console.error("❌ An error occurred!");
-    if (error.response && error.response.data) {
-      const errorData = error.response.data.extras
-        ? error.response.data.extras
-        : error.response.data;
-      console.log(`More details:\n${JSON.stringify(errorData, null, 2)}`);
+    console.error("❌ Falha na Transação!");
+    
+    if (error.response) {
+      if (error.response.status === 503) {
+        console.error("🚨 Rede Stellar instável (Erro 503). Aguarde um momento.");
+        return;
+      }
+      if (typeof error.response.data === 'string' && error.response.data.trim().startsWith('<')) {
+             console.error("   Servidor retornou erro HTML (provavelmente 503).");
+             return;
+        }
+      const errorData = error.response.data.extras || error.response.data;
+      console.log(`Detalhes do erro:\n${JSON.stringify(errorData, null, 2)}`);
     } else {
-      console.log(error);
+      console.log(error.message);
     }
   }
 }
