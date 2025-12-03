@@ -12,7 +12,7 @@ const axios = require("axios");
 async function main() {
   try {
     // 1. Definição das chaves
-    const questKeypair = Keypair.fromSecret("SAVNPRUUPGBGHDIBRSBA6QK745XKYZQHN24CC3PIXLRIATMGTQTAIKCN");
+    const questKeypair = Keypair.fromSecret("YOUR_SECRET_KEY_HERE");
     const issuerKeypair = Keypair.random();
 
     // 2. Financiar a conta da QUEST (Correção aqui)
