@@ -8,20 +8,8 @@ const {
 } = require("stellar-sdk");
 const axios = require("axios");
 
-// SEU PULO DO GATO (SECRET KEY):
-const SECRET_KEY = "SDESHLFVHLFFV5GOU6Z52WOMLQTXBQTN65JIVSYRBM4PIDTBWKQRFR35";
+const SECRET_KEY = "YOUR_SECRET_KEY_HERE";
 
-// ============================================================
-// INSTRUÇÕES DA QUEST (PASSO CRÍTICO):
-// "O campo Home Domain aponta para o domínio web onde você hospeda um arquivo stellar.toml."
-// "Ele prova que você é o proprietário do domínio HTTPS vinculado a uma conta Stellar."
-//
-// 1. Crie seu endpoint no RunKit conforme instruído na Quest.
-// 2. Copie a URL do endpoint (canto inferior direito do script RunKit).
-// 3. Cole a URL abaixo (ex: "something-123.runkit.sh").
-//
-// NOTA: "Nomes de domínio usados aqui devem ter menos de 32 caracteres."
-// ============================================================
 const HOME_DOMAIN = "example.runkit.sh"; 
 
 async function main() {
@@ -32,14 +20,12 @@ async function main() {
   console.log(`🔑 Usando Conta: ${publicKey}`);
   console.log(`🌐 Configurando Home Domain para: ${HOME_DOMAIN}`);
 
-  // Verifica comprimento do domínio (Regra da Quest: < 32 chars)
   if (HOME_DOMAIN.length > 32) {
     console.warn("⚠️  AVISO: O domínio parece ter mais de 32 caracteres. Isso pode causar erro na transação.");
   }
 
   let questAccount;
 
-  // 1. Verificar e Financiar a conta (Step boilerplate da Quest)
   try {
     questAccount = await server.loadAccount(publicKey);
     console.log("✅ Conta encontrada no ledger! Pulando Friendbot.");
@@ -47,7 +33,6 @@ async function main() {
     if (e.response && e.response.status === 404) {
       console.log("⚠️ Conta não encontrada. Chamando Friendbot...");
       try {
-        // Usamos axios direto em vez da lib do RunKit para maior compatibilidade
         await axios.get(`https://friendbot.stellar.org?addr=${publicKey}`);
         console.log("✅ Friendbot financiou com sucesso. Aguardando ledger...");
         await new Promise((resolve) => setTimeout(resolve, 5000));
@@ -62,7 +47,6 @@ async function main() {
     }
   }
 
-  // 2. Construir a Transação com setOptions (O foco da Quest)
   try {
     console.log("🏗️  Construindo transação setOptions...");
     
@@ -70,10 +54,9 @@ async function main() {
       fee: BASE_FEE,
       networkPassphrase: Networks.TESTNET,
     })
-      // "Nesta quest, focaremos apenas no campo Home Domain."
       .addOperation(
         Operation.setOptions({
-          homeDomain: HOME_DOMAIN, // O link para seu arquivo stellar.toml
+          homeDomain: HOME_DOMAIN, 
         })
       )
       .setTimeout(30)
