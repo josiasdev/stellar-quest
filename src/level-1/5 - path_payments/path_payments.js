@@ -11,7 +11,7 @@ const axios = require("axios");
 
 async function main() {
   try {
-    const questKeypair = Keypair.fromSecret("SDW36DEG7UIBSOKA7VR7L47OIWIISW72FMPCU3KM2VGIJXQK3THM4ZI5");
+    const questKeypair = Keypair.fromSecret("YOUR_SECRET_KEY_HERE");
     const issuerKeypair = Keypair.random();
     const distributorKeypair = Keypair.random();
     const destinationKeypair = Keypair.random();
