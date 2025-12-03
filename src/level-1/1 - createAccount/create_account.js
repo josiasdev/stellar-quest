@@ -1,3 +1,5 @@
+import StellarSdk from 'stellar-sdk';
+
 const {
   Keypair,
   Horizon,
@@ -5,7 +7,7 @@ const {
   Networks,
   Operation,
   BASE_FEE,
-} = require("stellar-sdk");
+} = StellarSdk;
 
 async function main() {
   try {
