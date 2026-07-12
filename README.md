@@ -4,7 +4,7 @@
 
 > A JavaScript implementation of Stellar Quest challenges to help developers learn the Stellar ecosystem through hands-on coding exercises!
 
-[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D20.0.0-brightgreen.svg)](https://nodejs.org/)
 [![Stellar SDK](https://img.shields.io/badge/Stellar%20SDK-13.3.0-blue.svg)](https://github.com/stellar/js-stellar-sdk)
 
@@ -125,7 +125,7 @@ Still have questions? The Stellar community is incredibly welcoming to beginner 
 ---
 
 ## 📝 License
-This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 - **[Stellar Quest](https://quest.stellar.org/)** - For the amazing original quest challenges.
