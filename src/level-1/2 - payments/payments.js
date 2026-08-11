@@ -11,7 +11,7 @@ const axios = require("axios");
 
 async function main() {
   try {
-    const questKeypair = Keypair.fromSecret("YOUR_SECRET_KEY_HERE");
+    const questKeypair = Keypair.fromSecret("SACH4MBQRYADWTDFL3GTM4ASELJVTHHTI7BW5TXHNZPLW27C7REEOF6R");
     const destinationKeypair = Keypair.random();
 
     console.log("Funding the new destination account...");

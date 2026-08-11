@@ -14,20 +14,25 @@ Assim como na primeira vez, começaremos pegando algumas coisas do `stellar-sdk`
 ```javascript
 const {
   Keypair,
-  Server,
+  Horizon,
   TransactionBuilder,
   Networks,
   Operation,
   Asset,
   BASE_FEE
-} = require('stellar-sdk')
+} = require('@stellar/stellar-sdk')
 ```
 
 Também criamos uma função auxiliar útil que pode conversar com o friendbot por nós! (Esse método de usar o friendbot não é estritamente necessário. Criamos esta função auxiliar apenas por conveniência. Você é livre para escolher qualquer outra forma de financiar essas contas.)
 ```javascript
-const { friendbot } = require('@runkit/elliotfriend/sq-learn-utils/1.0.6')
+const friendbot = async (keys) => {
+  const accounts = Array.isArray(keys) ? keys : [keys]
+  await Promise.all(accounts.map(pk =>
+    fetch(`https://friendbot.stellar.org?addr=${pk}`)
+  ))
+}
 ```
-*(Nota: No script local deste repositório, estamos na verdade usando o `axios` para chamar o endpoint do friendbot diretamente, já que o módulo do RunKit não está disponível localmente.)*
+*(Nota: No script local deste repositório, estamos usando o `axios` para chamar o endpoint do friendbot diretamente.)*
 
 Precisamos de dois pares de chaves (keypairs) para esta transação: uma conta de origem (source) e uma conta de destino. Neste caso, precisamos que ambas sejam financiadas na testnet.
 ```javascript
@@ -39,7 +44,7 @@ await friendbot([questKeypair.publicKey(), destinationKeypair.publicKey()])
 
 Configuramos o servidor e a conta que serão usados para construir e enviar a transação.
 ```javascript
-const server = new Server('https://horizon-testnet.stellar.org')
+const server = new Horizon.Server('https://horizon-testnet.stellar.org')
 const questAccount = await server.loadAccount(questKeypair.publicKey())
 ```
 
