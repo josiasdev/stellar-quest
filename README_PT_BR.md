@@ -61,9 +61,9 @@ cd stellar-quest
 npm install
 ```
 
-3. Rode seu primeiro exemplo:
+3. Rode um exemplo do Nível 1:
 ```bash
-node src/level-01/1_create_account.js
+node "src/level-1/1 - createAccount/createAccount.js"
 ```
 
 **O que você deve esperar ver no terminal?**
@@ -83,18 +83,18 @@ Copie a `Public Key` (que começa com `G`) gerada pelo seu terminal e cole-a no 
 ## 📚 Trilha de Aprendizado
 
 ### Nível 1: Fundamentos
-- **1_create_account.js** - Aprenda a criar novas contas Stellar
-- **2_payments.js** - Envie pagamentos em XLM entre contas
-- **3_change_trust.js** - Estabeleça linhas de confiança (trustlines) para novos ativos
-- **4_manager_offers.js** - Crie e gerencie ofertas de negociação
-- **5_path_payments.js** - Execute pagamentos com conversão de ativos
+- **[1 - createAccount](src/level-1/1%20-%20createAccount/)** - Aprenda a criar novas contas Stellar
+- **[2 - payments](src/level-1/2%20-%20payments/)** - Envie pagamentos em XLM entre contas
+- **[3 - change_trust](src/level-1/3-%20change_trust/)** - Estabeleça linhas de confiança (*trustlines*) para novos ativos
+- **[4 - manage_offers](src/level-1/4-%20manage_offers/)** - Crie e gerencie ofertas de negociação na DEX
+- **[5 - path_payments](src/level-1/5%20-%20path_payments/)** - Execute pagamentos com conversão de ativos (*path payments*)
 
 ### Nível 2: Operações Avançadas
-- **1_account_merge.js** - Mescle contas e transfira saldos
-- **2_manager_data.js** - Salve e recupere dados em uma conta
-- **3_set_options.js** - Configure opções da conta
-- **4_set_options_signers.js** - Gerencie múltiplos assinantes (signers)
-- **5_set_flags.js** - Configure permissões e *flags* da conta
+- **[1 - account_merge](src/level-2/1%20-%20account_merge/)** - Mescle contas e transfira o saldo nativo em XLM
+- **[2 - manage_data](src/level-2/2%20-%20manage_data/)** - Salve e recupere pares chave/valor nos metadados de uma conta
+- **[3 - set_options_home_domain](src/level-2/3%20-%20set_options_home_domain/)** - Vincule contas Stellar a domínios web (`stellar.toml`)
+- **[4 - set_options_weights_thresholds_signers](src/level-2/4%20-%20set_options_weights_thresholds_signers/)** - Configure multi-assinatura (*multisig*), pesos e limites de operação
+- **[5 - set_flags](src/level-2/5%20-%20set_flags/)** - Configure permissões de ativos (`authRequired`/`authRevocable`) e gerencie *trustlines*
 
 ### Nível 3: Em Breve
 - Estratégias avançadas de negociação
