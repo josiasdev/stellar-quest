@@ -83,18 +83,18 @@ Copie a `Public Key` (que começa com `G`) gerada pelo seu terminal e cole-a no 
 ## 📚 Trilha de Aprendizado
 
 ### Nível 1: Fundamentos
-- **[1 - createAccount](src/level-1/1%20-%20createAccount/)** - Aprenda a criar novas contas Stellar
-- **[2 - payments](src/level-1/2%20-%20payments/)** - Envie pagamentos em XLM entre contas
-- **[3 - change_trust](src/level-1/3-%20change_trust/)** - Estabeleça linhas de confiança (*trustlines*) para novos ativos
-- **[4 - manage_offers](src/level-1/4-%20manage_offers/)** - Crie e gerencie ofertas de negociação na DEX
-- **[5 - path_payments](src/level-1/5%20-%20path_payments/)** - Execute pagamentos com conversão de ativos (*path payments*)
+- **[1 - createAccount](src/level-1/1%20-%20createAccount/README_PT_BR.md)** - Aprenda a criar novas contas Stellar
+- **[2 - payments](src/level-1/2%20-%20payments/README_PT_BR.md)** - Envie pagamentos em XLM entre contas
+- **[3 - change_trust](src/level-1/3-%20change_trust/README_PT_BR.md)** - Estabeleça linhas de confiança (*trustlines*) para novos ativos
+- **[4 - manage_offers](src/level-1/4-%20manage_offers/README_PT_BR.md)** - Crie e gerencie ofertas de negociação na DEX
+- **[5 - path_payments](src/level-1/5%20-%20path_payments/README_PT_BR.md)** - Execute pagamentos com conversão de ativos (*path payments*)
 
 ### Nível 2: Operações Avançadas
-- **[1 - account_merge](src/level-2/1%20-%20account_merge/)** - Mescle contas e transfira o saldo nativo em XLM
-- **[2 - manage_data](src/level-2/2%20-%20manage_data/)** - Salve e recupere pares chave/valor nos metadados de uma conta
-- **[3 - set_options_home_domain](src/level-2/3%20-%20set_options_home_domain/)** - Vincule contas Stellar a domínios web (`stellar.toml`)
-- **[4 - set_options_weights_thresholds_signers](src/level-2/4%20-%20set_options_weights_thresholds_signers/)** - Configure multi-assinatura (*multisig*), pesos e limites de operação
-- **[5 - set_flags](src/level-2/5%20-%20set_flags/)** - Configure permissões de ativos (`authRequired`/`authRevocable`) e gerencie *trustlines*
+- **[1 - account_merge](src/level-2/1%20-%20account_merge/README_PT_BR.md)** - Mescle contas e transfira o saldo nativo em XLM
+- **[2 - manage_data](src/level-2/2%20-%20manage_data/README_PT_BR.md)** - Salve e recupere pares chave/valor nos metadados de uma conta
+- **[3 - set_options_home_domain](src/level-2/3%20-%20set_options_home_domain/README_PT_BR.md)** - Vincule contas Stellar a domínios web (`stellar.toml`)
+- **[4 - set_options_weights_thresholds_signers](src/level-2/4%20-%20set_options_weights_thresholds_signers/README_PT_BR.md)** - Configure multi-assinatura (*multisig*), pesos e limites de operação
+- **[5 - set_flags](src/level-2/5%20-%20set_flags/README_PT_BR.md)** - Configure permissões de ativos (`authRequired`/`authRevocable`) e gerencie *trustlines*
 
 ### Nível 3: Em Breve
 - Estratégias avançadas de negociação
